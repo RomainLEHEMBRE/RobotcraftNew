@@ -1,0 +1,72 @@
+//============================================================================
+// Name        : Task1_exercise.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+#include "Position.hpp"
+#include <cmath>
+#include <vector>
+#include <cstdlib>
+
+using namespace std;
+
+
+int main() {
+
+
+	////////////// Part a ////////////////////
+
+	int number_array=4;
+	Position *MyRobot=new Position(10,10);
+	printf("First Robot : \n");
+	MyRobot->PrintPosition(MyRobot);
+
+	////////////// Part b ////////////////////
+
+	Position *MySecondRobot= MyRobot->CreatePosition(20,20);
+	printf("\nSecond Robot : \n");
+	MyRobot->PrintPosition(MySecondRobot);
+
+	////////////// Part c ////////////////////
+
+	MyRobot->DestroyPosition(MySecondRobot); //Destroy the position of the robot
+	printf("\n");
+
+	if(MySecondRobot->x!=20 && MySecondRobot->y!=20) // To test if the object is really destroyed
+		printf("\nThe Second Robot object is destroyed");
+
+	////////////// Part d ////////////////////
+
+	printf("\nThe distance between the first robot and the target is : %f",MyRobot->DistancePositions(MyRobot,20,20));
+
+	////////////// Part e ////////////////////
+
+	std::vector<Position> arrayOfPosition = MyRobot->GenerateArrayOfPositions(number_array);
+
+	printf("\n\nCoordinates of all positions : \n");
+
+	for(int i=0;i<number_array;i++){
+		printf("\nArray number %d : \n",i);
+		MyRobot->PrintPosition(&arrayOfPosition[i]);
+	}
+
+	////////////// Part f ////////////////////
+
+	for(int i=0;i<number_array;i++){
+		arrayOfPosition.erase(arrayOfPosition.begin() + i);
+	}
+
+
+	printf("\n\nCoordinates of all positions after destroyed : \n");
+
+	for(int i=0;i<number_array;i++){
+		printf("\nArray number %d : \n",i);
+		MyRobot->PrintPosition(&arrayOfPosition[i]); // The x and y coordonate for the array number 0 are memory value
+	}
+
+
+}
